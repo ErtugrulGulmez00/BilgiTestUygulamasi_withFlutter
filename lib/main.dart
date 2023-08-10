@@ -28,13 +28,15 @@ class SoruSayfasi extends StatefulWidget {
 
 class _SoruSayfasiState extends State<SoruSayfasi> {
   List <String> sorular=[
-    'litanic gelmiş geçmiş en büyük gemidir',
+    'Titanic gelmiş geçmiş en büyük gemidir',
     'Dünyadaki tavuk sayısı insan sayısından fazladır',
     'Kelebeklerin ömrü bir gündür',
     'Dünya düzdür' ,
     'Kaju fıstığı aslında bir meyvenin sapıdır',
     'Fatih Sultan Mehmet hiç patates yememişti'
   ];
+  int soruIndex=0;
+
   List<Widget> secimSonucuIconlari = [];
 
   @override
@@ -49,7 +51,7 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                'Bilgi Testi Soruları',
+                sorular[soruIndex],
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 20.0,
@@ -80,6 +82,7 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
                       ),
                       onPressed: () {
                         setState(() {
+                          soruIndex++;
                           secimSonucuIconlari.add(kYanlisIconu);
                         });
                       },
@@ -100,6 +103,7 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
                       ),
                       onPressed: () {
                         setState(() {
+                          soruIndex++;
                           secimSonucuIconlari.add(kDogruIconu);
                         });
                       },
