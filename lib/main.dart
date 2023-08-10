@@ -27,16 +27,25 @@ class SoruSayfasi extends StatefulWidget {
 }
 
 class _SoruSayfasiState extends State<SoruSayfasi> {
-  List <String> sorular=[
-    'Titanic gelmiş geçmiş en büyük gemidir',
-    'Dünyadaki tavuk sayısı insan sayısından fazladır',
-    'Kelebeklerin ömrü bir gündür',
-    'Dünya düzdür' ,
-    'Kaju fıstığı aslında bir meyvenin sapıdır',
-    'Fatih Sultan Mehmet hiç patates yememişti'
-  ];
-  int soruIndex=0;
 
+  int soruIndex = 0;
+
+
+  List<Soru> soruBankasi = [
+    Soru(
+        soruMetni: 'Titanic gelmiş geçmiş en büyük gemidir', soruYaniti: false),
+    Soru(
+        soruMetni: 'Dünyadaki tavuk sayısı insan sayısından fazladır',
+        soruYaniti: true),
+    Soru(soruMetni: 'Kelebeklerin ömrü bir gündür', soruYaniti: false),
+    Soru(soruMetni: 'Dünya düzdür', soruYaniti: false),
+    Soru(
+        soruMetni: 'Kaju fıstığı aslında bir meyvenin sapıdır',
+        soruYaniti: true),
+    Soru(
+        soruMetni: 'Fatih Sultan Mehmet hiç patates yememişti',
+        soruYaniti: true),
+  ];
   List<Widget> secimSonucuIconlari = [];
 
   @override
@@ -51,7 +60,7 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                sorular[soruIndex],
+                soruBankasi[soruIndex].soruMetni,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 20.0,
@@ -62,7 +71,6 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
           ),
         ),
         Wrap(
-
           spacing: 5,
           runSpacing: 5,
           children: secimSonucuIconlari,
@@ -78,12 +86,21 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
                     padding: EdgeInsets.symmetric(horizontal: 6),
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.all(12), backgroundColor: Colors.red[400],
+                        padding: EdgeInsets.all(12),
+                        backgroundColor: Colors.red[400],
                       ),
                       onPressed: () {
+                        bool dogruYanit = soruBankasi[soruIndex].soruYaniti;
                         setState(() {
+                          if (dogruYanit == false) {
+                            secimSonucuIconlari.add(kDogruIconu);
+                          } else {
+                            secimSonucuIconlari.add(kYanlisIconu);
+                          }
+                          if( soruIndex == 5) {soruIndex=0;}
+
                           soruIndex++;
-                          secimSonucuIconlari.add(kYanlisIconu);
+                          // secimSonucuIconlari.add(kYanlisIconu);
                         });
                       },
                       child: Icon(
@@ -102,9 +119,16 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
                         backgroundColor: Colors.green[400],
                       ),
                       onPressed: () {
+                        bool dogruYanit = soruBankasi[soruIndex].soruYaniti;
                         setState(() {
+                          if (dogruYanit == true) {
+                            secimSonucuIconlari.add(kDogruIconu);
+                          } else {
+                            secimSonucuIconlari.add(kYanlisIconu);
+                          }
+                          if( soruIndex == 5) {soruIndex=0;}
                           soruIndex++;
-                          secimSonucuIconlari.add(kDogruIconu);
+                          // secimSonucuIconlari.add(kDogruIconu);
                         });
                       },
                       child: Icon(
@@ -121,4 +145,13 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
       ],
     );
   }
+}
+
+class Soru {
+  String soruMetni;
+  bool soruYaniti;
+
+// Constructer ataması o objeye default olmayan özel verileri atamamıza yardımcı olur.
+
+  Soru({required this.soruMetni, required this.soruYaniti});
 }
