@@ -1,3 +1,4 @@
+import 'package:bilgi_testi/pages/constants.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(BilgiTesti());
@@ -8,7 +9,6 @@ class BilgiTesti extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: true,
       home: Scaffold(
-
         backgroundColor: Colors.indigo[700],
         body: SafeArea(
           child: Padding(
@@ -27,6 +27,11 @@ class SoruSayfasi extends StatefulWidget {
 }
 
 class _SoruSayfasiState extends State<SoruSayfasi> {
+  List<Widget> secimSonucuIconlari = [
+    dogruIconu,
+    yanlisIconu,
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -49,6 +54,9 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
             ),
           ),
         ),
+        Row(
+          children: secimSonucuIconlari,
+        ),
         Expanded(
           flex: 1,
           child: Padding(
@@ -60,8 +68,7 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
                     padding: EdgeInsets.symmetric(horizontal: 6),
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.all(12),
-                        primary: Colors.red[400],
+                        padding: EdgeInsets.all(12), backgroundColor: Colors.red[400],
                       ),
                       onPressed: () {},
                       child: Icon(
@@ -77,7 +84,7 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         padding: EdgeInsets.all(12),
-                        primary: Colors.green[400],
+                        backgroundColor: Colors.green[400],
                       ),
                       onPressed: () {},
                       child: Icon(
