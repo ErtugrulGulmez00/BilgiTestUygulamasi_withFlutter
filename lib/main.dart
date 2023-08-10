@@ -27,10 +27,15 @@ class SoruSayfasi extends StatefulWidget {
 }
 
 class _SoruSayfasiState extends State<SoruSayfasi> {
-  List<Widget> secimSonucuIconlari = [
-    dogruIconu,
-    yanlisIconu,
+  List <String> sorular=[
+    'litanic gelmiş geçmiş en büyük gemidir',
+    'Dünyadaki tavuk sayısı insan sayısından fazladır',
+    'Kelebeklerin ömrü bir gündür',
+    'Dünya düzdür' ,
+    'Kaju fıstığı aslında bir meyvenin sapıdır',
+    'Fatih Sultan Mehmet hiç patates yememişti'
   ];
+  List<Widget> secimSonucuIconlari = [];
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +59,10 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
             ),
           ),
         ),
-        Row(
+        Wrap(
+
+          spacing: 5,
+          runSpacing: 5,
           children: secimSonucuIconlari,
         ),
         Expanded(
@@ -70,7 +78,11 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
                       style: ElevatedButton.styleFrom(
                         padding: EdgeInsets.all(12), backgroundColor: Colors.red[400],
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          secimSonucuIconlari.add(kYanlisIconu);
+                        });
+                      },
                       child: Icon(
                         Icons.thumb_down,
                         size: 30.0,
@@ -86,7 +98,11 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
                         padding: EdgeInsets.all(12),
                         backgroundColor: Colors.green[400],
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          secimSonucuIconlari.add(kDogruIconu);
+                        });
+                      },
                       child: Icon(
                         Icons.thumb_up,
                         size: 30.0,
