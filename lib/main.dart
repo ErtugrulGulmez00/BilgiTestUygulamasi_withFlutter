@@ -3,9 +3,11 @@ import 'package:bilgi_testi/pages/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:bilgi_testi/pages/veri.dart';
 
-void main() => runApp(BilgiTesti());
+void main() => runApp(const BilgiTesti());
 
 class BilgiTesti extends StatelessWidget {
+  const BilgiTesti({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -13,9 +15,9 @@ class BilgiTesti extends StatelessWidget {
       home: Scaffold(
 
         backgroundColor: Colors.indigo[700],
-        body: SafeArea(
+        body: const SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            padding: EdgeInsets.symmetric(horizontal: 10.0),
             child: SoruSayfasi(),
           ),
         ),
@@ -25,13 +27,16 @@ class BilgiTesti extends StatelessWidget {
 }
 
 class SoruSayfasi extends StatefulWidget {
+  const SoruSayfasi({super.key});
+
   @override
   _SoruSayfasiState createState() => _SoruSayfasiState();
 }
 
 class _SoruSayfasiState extends State<SoruSayfasi> {
 
-  int soruIndex = 0;
+
+
 
 
 
@@ -49,7 +54,7 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
             padding: const EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                veri_1.soruBankasi[soruIndex].soruMetni,
+                veri_1.getSoruMetni(),
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 20.0,
@@ -79,16 +84,16 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
                         backgroundColor: Colors.red[400],
                       ),
                       onPressed: () {
-                        bool dogruYanit = veri_1.soruBankasi[soruIndex].soruYaniti;
+
                         setState(() {
+                          bool dogruYanit = veri_1.getSoruYaniti();
                           if (dogruYanit == false) {
                             secimSonucuIconlari.add(kDogruIconu);
                           } else {
                             secimSonucuIconlari.add(kYanlisIconu);
                           }
-                          if( soruIndex == 5) {soruIndex=0;}
+                          veri_1.sonrakiSoruDuzeltme();
 
-                          soruIndex++;
                           // secimSonucuIconlari.add(kYanlisIconu);
                         });
                       },
@@ -108,15 +113,17 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
                         backgroundColor: Colors.green[400],
                       ),
                       onPressed: () {
-                        bool dogruYanit = veri_1.soruBankasi[soruIndex].soruYaniti;
+
                         setState(() {
+                          bool dogruYanit = veri_1.getSoruYaniti();
                           if (dogruYanit == true) {
                             secimSonucuIconlari.add(kDogruIconu);
                           } else {
                             secimSonucuIconlari.add(kYanlisIconu);
                           }
-                          if( soruIndex == 5) {soruIndex=0;}
-                          soruIndex++;
+                          veri_1.sonrakiSoruDuzeltme();
+
+
                           // secimSonucuIconlari.add(kDogruIconu);
                         });
                       },

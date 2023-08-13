@@ -1,7 +1,8 @@
 import 'package:bilgi_testi/pages/soru.dart';
 
 class Veriler {
-  List<Soru> soruBankasi = [
+  int _soruIndex = 0;
+  final List<Soru> _soruBankasi = [
     Soru(
         soruMetni: 'Titanic gelmiş geçmiş en büyük gemidir', soruYaniti: false),
     Soru(
@@ -16,4 +17,19 @@ class Veriler {
         soruMetni: 'Fatih Sultan Mehmet hiç patates yememişti',
         soruYaniti: true),
   ];
+  String getSoruMetni() {
+    return _soruBankasi[_soruIndex].soruMetni;
+
+}
+ bool getSoruYaniti(){
+    return _soruBankasi[_soruIndex].soruYaniti;
+
+
+}
+   sonrakiSoruDuzeltme (){
+    if( _soruIndex == 5) {_soruIndex=0;}
+
+    _soruIndex++;
+    return;
+  }
 }
