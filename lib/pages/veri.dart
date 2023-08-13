@@ -32,4 +32,17 @@ class Veriler {
     _soruIndex++;
     return;
   }
+  bool testBittimi(){
+    if(_soruIndex==5){
+
+      return true;
+
+    }else{
+      return false;
+    }
+
+  }
+  void indexSifirlama(){
+    _soruIndex=0;
+  }
 }

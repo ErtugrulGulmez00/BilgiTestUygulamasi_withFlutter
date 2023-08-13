@@ -35,12 +35,59 @@ class SoruSayfasi extends StatefulWidget {
 
 class _SoruSayfasiState extends State<SoruSayfasi> {
 
-
-
-
-
-
   List<Widget> secimSonucuIconlari = [];
+
+
+  void butonFonksiyonu( bool secilenButon){
+    if(veri_1.testBittimi()==true){
+      //alert dialog gösterilecek
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          // return object of type Dialog
+          return AlertDialog(
+            title:  const Text("Tebrikler testi bitirdiniz"),
+            content:  const Text("Bütün sorulara cevap verildi"),
+            actions: <Widget>[
+              // usually buttons at the bottom of the dialog
+               TextButton(
+                child:  const Text("Başa dön"),
+                onPressed: () {
+                  setState(() {
+                    //indexi 0 a eşitle
+                    veri_1.indexSifirlama();
+
+                    //secimleri sıfırla
+                    secimSonucuIconlari=[];
+
+                  });
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+
+    }else{
+      setState(() {
+        bool dogruYanit = veri_1.getSoruYaniti();
+        if (dogruYanit == secilenButon) {
+          secimSonucuIconlari.add(kDogruIconu);
+        }
+        else {
+          secimSonucuIconlari.add(kYanlisIconu);
+        }
+        veri_1.sonrakiSoruDuzeltme();
+
+
+      });
+
+
+    }
+
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -84,18 +131,9 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
                         backgroundColor: Colors.red[400],
                       ),
                       onPressed: () {
+                        butonFonksiyonu(false);
 
-                        setState(() {
-                          bool dogruYanit = veri_1.getSoruYaniti();
-                          if (dogruYanit == false) {
-                            secimSonucuIconlari.add(kDogruIconu);
-                          } else {
-                            secimSonucuIconlari.add(kYanlisIconu);
-                          }
-                          veri_1.sonrakiSoruDuzeltme();
 
-                          // secimSonucuIconlari.add(kYanlisIconu);
-                        });
                       },
                       child: const Icon(
                         Icons.thumb_down,
@@ -114,18 +152,7 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
                       ),
                       onPressed: () {
 
-                        setState(() {
-                          bool dogruYanit = veri_1.getSoruYaniti();
-                          if (dogruYanit == true) {
-                            secimSonucuIconlari.add(kDogruIconu);
-                          } else {
-                            secimSonucuIconlari.add(kYanlisIconu);
-                          }
-                          veri_1.sonrakiSoruDuzeltme();
-
-
-                          // secimSonucuIconlari.add(kDogruIconu);
-                        });
+                        butonFonksiyonu(true);
                       },
                       child: const Icon(
                         Icons.thumb_up,
